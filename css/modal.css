@@ -1,0 +1,133 @@
+/*Las variables son un paso opcional. 
+Creamos variables para los colores.
+:root representa el documento Html.
+Declara variables con dos guiones antes del nombre que quieras.
+*/
+:root {
+  --main-color: #fff;
+  --button-color: orange;
+}
+
+@font-face {
+  font-family: "AntroVectra";
+  src: url("../fonts/Antro_Vectra.eot");
+  src: url("../fonts/Antro_Vectra.eot") format("embedded-opentype"),
+    url("../fonts/Antro_Vectra.woff2") format("woff2"),
+    url("../fonts/Antro_Vectra.woff") format("woff"),
+    url("../fonts/Antro_Vectra.ttf") format("truetype"),
+    url("../fonts/Antro_Vectra.svg#AntroVectraregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #fff;
+  letter-spacing: 1px;
+  overflow-x: hidden;
+}
+
+/*
+*Botón para abrir y cerrar modal (estilos para ambos)
+*Llamamos a la variable con la palabra reservada var, entre paréntesis colocamos dos guiones antes del nombre de la variable.
+*/
+.modal-button {
+  background: var(--button-color);
+  color: var(--main-color);
+  display: inline-block;
+  padding: 17px 17px;
+  margin: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: auto;
+
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  display: inline-block;
+  flex-wrap: wrap;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transform: translateY(-150%) rotate(180deg) scale(0);
+  transition: 0.8s ease;
+  max-height: calc(100vh - 210px);
+  overflow-y: scroll;
+}
+/*
+display:flex, justify-content:center y align-items:center, para centrar el ".modal-inner" vertical y horizontalmente dentro del ".modal"
+	
+*height:100vh para que ocupe todo el alto del viewport.
+	
+*transform:translateY(-150%) para llevar el modal fuera de la pantalla, por eso al botón de abrir el modal le pusimos transform:translateY(0), para que vuelva a su estado inicial cuando le hagamos clic.
+	
+*Transition es el efecto para que no aparezca de manera brusca el modal.
+	
+*position:fixed, top:0, left:0, para fijar el modal completamente al viewport (arriba y a la izquierda). 
+	
+*z-index:Posiciona al modal por encima de todo el contenido que puedas tener (en este caso)
+	
+*Puedes jugar con la propiedad transform, aqui lo trasladé, roté y achiqué de tamaño
+*/
+
+/*Oculto el checkbox (el recuadro del check)*/
+#modal-button {
+  display: none;
+}
+
+#modal-button:checked ~ .modal {
+  transform: translateY(0);
+}
+/*
+Cuando el botón de abrir está activo (checked) traigo el modal a la pantalla y cuando presiono el de cerrar (unchecked) lo lleva de nuevo hacia arriba (en este caso, porque puedes manipular hacia donde quieres que vaya). 
+
+El selector ~ selecciona el siguiente elemento sólo si está precedido por el primero y ambos comparten un padre común, esto es muy importante entenderlo sino no funciona.
+
+En este caso cuando presionas el boton de "abrir modal" se abre el div que está justo después, tienen que estar al mismo nivel.
+*/
+
+/*
+Botón para cerrar modal
+Posicionado de manera absoluta a la derecha.
+*/
+.modal-button-close {
+  position: fixed;
+  right: 0;
+  top:10%;
+}
+
+/*
+Contenido dentro del modal
+La posicion relativa de ".modal-inner" es para que el botón que está dentro, se posicione de manera absoluta.
+*/
+.modal-inner {
+  background: var(--main-color);
+  width: 90%;
+  height: 90%;
+  position: relative;
+}
+
+/*   Añadido   */
+.modal-inner img {
+  background: var(--main-color);
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+/*------------------
+.sticky-top {
+  position: fixed;
+}
